@@ -307,25 +307,25 @@ def main() :
 
                 right_column.plotly_chart(gauge)
 
-            show_local_feature_importance = st.checkbox(
-                "Afficher les variables ayant le plus contribué à la décision du modèle ?")
-            if (show_local_feature_importance):
-                shap.initjs()
+            #show_local_feature_importance = st.checkbox(
+                #"Afficher les variables ayant le plus contribué à la décision du modèle ?")
+            #if (show_local_feature_importance):
+                #shap.initjs()
 
-                number = st.slider('Sélectionner le nombre de feautures à afficher ?', \
-                                   2, 20, 8)
+                #number = st.slider('Sélectionner le nombre de feautures à afficher ?', \
+                                   #2, 20, 8)
 
-                X = df[df['SK_ID_CURR']==int(id_client)]
-                X = X[relevant_features]
+                #X = df[df['SK_ID_CURR']==int(id_client)]
+                #X = X[relevant_features]
 
-                fig, ax = plt.subplots(figsize=(15, 15))
-                explainer = shap.TreeExplainer(model)
-                shap_values = explainer.shap_values(X)
-                shap.summary_plot(shap_values[0], X, plot_type ="bar", \
-                                  max_display=number, color_bar=False, plot_size=(8, 8))
+                #fig, ax = plt.subplots(figsize=(15, 15))
+                #explainer = shap.TreeExplainer(model)
+                #shap_values = explainer.shap_values(X)
+                #shap.summary_plot(shap_values[0], X, plot_type ="bar", \
+                                  #max_display=number, color_bar=False, plot_size=(8, 8))
 
 
-                st.pyplot(fig)
+                #st.pyplot(fig)
 
         #-------------------------------------------------------
         # Afficher les informations du client
