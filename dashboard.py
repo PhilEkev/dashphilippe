@@ -32,20 +32,20 @@ def main() :
         #données test avant feature engeniering
         
         #data_test = pd.read_csv(PATH+'application_test.csv')
-        #data_test = pd.read_parquet(PATH+'application_test.parquet')
+        data_test = pd.read_parquet(PATH+'application_test.parquet')
         
         #données train avant feature engeniering
         
         #data_train = pd.read_csv(PATH+'application_train.csv')
-        #data_train = pd.read_parquet(PATH+'application_train.parquet')
+        data_train = pd.read_parquet(PATH+'application_train.parquet')
         
         #description des features
         description = pd.read_csv(PATH+'HomeCredit_columns_description.csv', 
                                       usecols=['Row', 'Description'], \
                                   index_col=0, encoding='unicode_escape')
 
-        # return df, data_test, data_train, description
-        return df, description
+        return df, data_test, data_train, description
+        #return df, description
 
     @st.cache
     def load_model():
@@ -169,8 +169,8 @@ def main() :
             
             
     #Chargement des données    
-    # df, data_test, data_train, description = load_data()
-    df, description = load_data()
+    df, data_test, data_train, description = load_data()
+    #df, description = load_data()
 
     ignore_features = ['Unnamed: 0','SK_ID_CURR', 'INDEX', 'TARGET']
     relevant_features = [col for col in df if col not in ignore_features]
@@ -236,8 +236,8 @@ def main() :
 
     if (int(id_client) in id_list):
 
-        # client_info = get_client_info(data_test, id_client)
-        client_info = get_client_info(df, id_client)
+        client_info = get_client_info(data_test, id_client)
+        #client_info = get_client_info(df, id_client)
 
         #-------------------------------------------------------
         # Afficher la décision de crédit
@@ -403,22 +403,22 @@ def main() :
                 [list(personal_info_cols.values()).index(var)]    
 
                 if (feature in numerical_features):                
-                    # plot_distribution(data_train, feature, client_info[feature], var)   
-                    plot_distribution(df, feature, client_info[feature], var) 
+                    plot_distribution(data_train, feature, client_info[feature], var)   
+                    #plot_distribution(df, feature, client_info[feature], var) 
                 elif (feature in rotate_label):
-                    # univariate_categorical(data_train, feature, \
-                    #                        client_info[feature], var, False, True)
-                    univariate_categorical(df, feature, \
-                                           client_info[feature], var, False, True)
+                    univariate_categorical(data_train, feature, \
+                                            client_info[feature], var, False, True)
+                    #univariate_categorical(df, feature, \
+                                           #client_info[feature], var, False, True)
 
                 elif (feature in horizontal_layout):
-                    # univariate_categorical(data_train, feature, \
-                    #                        client_info[feature], var, False, True, True)
-                    univariate_categorical(df, feature, \
-                                           client_info[feature], var, False, True, True)
+                    univariate_categorical(data_train, feature, \
+                                            client_info[feature], var, False, True, True)
+                    #univariate_categorical(df, feature, \
+                                           #client_info[feature], var, False, True, True)
                 else:
-                    # univariate_categorical(data_train, feature, client_info[feature], var)
-                    univariate_categorical(df, feature, client_info[feature], var)
+                    univariate_categorical(data_train, feature, client_info[feature], var)
+                    #univariate_categorical(df, feature, client_info[feature], var)
                                     
                 #if(st.checkbox("Afficher les clients similaires")):
                 #    X_test = df
